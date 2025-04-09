@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from '../../components/Header';
 import styles from './styles';
@@ -11,7 +11,7 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <Header navigation={navigation} />
 
-      <ScrollView contentContainerStyle={styles.content}>
+      <View style={styles.content}>
         
         <View style={styles.profileContainer}>
           <Icon name="account-circle" size={100} color="#ffc72c" />
@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
           </View>
         </View>
 
-      </ScrollView>
+      </View>
     </View>
   );
 }
