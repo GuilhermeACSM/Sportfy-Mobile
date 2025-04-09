@@ -11,7 +11,9 @@ export default function Header({ navigation }) {
     <>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => setMenuVisible(true)}>
-          <Icon name="menu" size={30} color="#fff" />
+          <View style={styles.menuHam}>
+            <Icon name="menu" size={30} color="#fff" />
+          </View>
         </TouchableOpacity>
 
         <Image source={require('../../../assets/Logo1.png')} style={styles.logo} />

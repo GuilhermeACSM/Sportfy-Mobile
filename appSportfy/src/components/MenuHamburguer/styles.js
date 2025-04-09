@@ -28,7 +28,6 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     zIndex: 9, 
   },
-  
   menu: {
     position: 'absolute',
     right: 0,
@@ -38,7 +37,7 @@ export default StyleSheet.create({
     backgroundColor: '#111',
     padding: 20,
     justifyContent: 'center',
-    zIndex: 10, 
+    zIndex: 10,
   },
   menuItem: {
     marginVertical: 20,

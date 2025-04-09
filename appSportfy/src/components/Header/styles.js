@@ -18,6 +18,7 @@ export default StyleSheet.create({
     width: 100,
     height: 40,
     resizeMode: 'contain',
+    marginTop: 25,
   },
   overlay: {
     position: 'absolute',
@@ -35,6 +36,9 @@ export default StyleSheet.create({
     width: width * 0.6,
     backgroundColor: '#111', 
     padding: 20,
+  },
+  menuHam: {
+    marginTop: 25,
   },
   menuText: {
     fontSize: 18,
