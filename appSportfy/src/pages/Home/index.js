@@ -41,7 +41,7 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
 
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Compromissos')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MeusCompromissos')}>
           <Text style={styles.buttonText}>Meus Compromissos</Text>
         </TouchableOpacity>
 
