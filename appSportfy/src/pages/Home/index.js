@@ -1,29 +1,45 @@
 import React from 'react';
+import { useRoute } from '@react-navigation/native';
+import { Image } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from '../../components/Header';
 import styles from './styles';
 
 export default function Home({ navigation }) {
-  const nomeUsuario = 'Guilherme'; 
+  const nomeUsuario = 'Guilherme';
+
+  //Para a Foto de Perfil
+  const route = useRoute();
+  const fotoPerfil = route.params?.fotoPerfil;
+
 
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
 
       <View style={styles.content}>
-        
+
         <View style={styles.profileContainer}>
-          <Icon name="account-circle" size={100} color="#ffc72c" />
+          {fotoPerfil ? (
+            <Image source={{ uri: fotoPerfil }} style={{ width: 100, height: 100, borderRadius: 50 }} />
+          ) : (
+            <Icon name="account-circle" size={100} color="#ffc72c" />
+          )}
+
           <Text style={styles.welcomeText}>Olá, {nomeUsuario}!</Text>
           <Text style={styles.subtitle}>
             Conectando pessoas através do esporte!
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Perfil')}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('EditarPerfil', { fotoPerfil: fotoPerfil })}
+        >
           <Text style={styles.buttonText}>Editar Perfil</Text>
         </TouchableOpacity>
+
 
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Compromissos')}>
           <Text style={styles.buttonText}>Meus Compromissos</Text>

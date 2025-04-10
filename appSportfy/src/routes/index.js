@@ -4,6 +4,7 @@ import Cadastro from '../pages/Cadastro';
 import PessoaFisica from '../pages/PessoaFisica';
 import PessoaJuridica from '../pages/PessoaJuridica';
 import Home from '../pages/Home';
+import EditarPerfil from '../pages/EditarPerfil';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function Routes() {
       <Stack.Screen name="PessoaFisica" component={PessoaFisica} />
       <Stack.Screen name="PessoaJuridica" component={PessoaJuridica} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
     </Stack.Navigator>
   );
 }
