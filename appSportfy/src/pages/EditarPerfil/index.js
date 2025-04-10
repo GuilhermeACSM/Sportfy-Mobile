@@ -7,125 +7,116 @@ import Header from '../../components/Header';
 import styles from './styles';
 
 export default function EditarPerfil({ navigation }) {
-    const route = useRoute();
-    const fotoPerfilAntiga = route.params?.fotoPerfil; // Pegando a foto da Home
+  const route = useRoute();
+  const fotoPerfilAntiga = route.params?.fotoPerfil; // Pegando a foto da Home
 
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [senha, setSenha] = useState('');
-    const [foto, setFoto] = useState(null);
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [senha, setSenha] = useState('');
+  const [foto, setFoto] = useState(null);
 
-    useEffect(() => {
-        const buscarFotoSalva = async () => {
-            const fotoSalva = await AsyncStorage.getItem('fotoPerfil');
-            if (fotoSalva) {
-                setFoto(fotoSalva);
-            }
-        };
+  useEffect(() => {
+    if (fotoPerfilAntiga) {
+      setFoto(fotoPerfilAntiga);
+    }
+  }, [fotoPerfilAntiga]);
 
-        buscarFotoSalva();
-    }, []);
+  const handleEscolherFoto = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
 
-    const handleEscolherFoto = async () => {
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [1, 1],
-            quality: 1,
-        });
+    if (!result.canceled) {
+      setFoto(result.assets[0].uri);
+    }
+  };
 
-        if (!result.canceled) {
-            const uri = result.assets[0].uri;
-            setFoto(uri);
-            await AsyncStorage.setItem('fotoPerfil', uri);
-        }
-    };
+  const handleSalvar = () => {
+    Alert.alert('Sucesso', 'Alterações salvas com sucesso!');
+    navigation.navigate('Home', { fotoPerfil: foto });
+  };
 
+  return (
+    <View style={styles.container}>
+      <Header navigation={navigation} />
 
-    const handleSalvar = () => {
-        Alert.alert('Sucesso', 'Alterações salvas com sucesso!');
-        navigation.navigate('Home', { fotoPerfil: foto });
-    };
+      <View style={styles.content}>
 
-    return (
-        <View style={styles.container}>
-            <Header navigation={navigation} />
-
-            <View style={styles.content}>
-
-            <TouchableOpacity onPress={handleEscolherFoto}>
-        {foto ? (
-          <Image
-            source={{ uri: foto }}
-            style={{ width: 150, height: 150, borderRadius: 75 }}
-          />
-        ) : (
-          <View style={{ 
-            width: 150, 
-            height: 150, 
-            borderRadius: 75, 
-            backgroundColor: '#ccc', 
-            justifyContent: 'center', 
-            alignItems: 'center' 
-          }}>
-            <Icon name="camera-plus" size={50} color="#fff" />
-          </View>
-        )}
-      </TouchableOpacity>
-
-                <Text style={styles.title}>Editar Perfil</Text>
-
-                <View style={styles.inputArea}>
-                    <Icon name="account" size={25} color="#ffc72c" />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Nome"
-                        placeholderTextColor="#aaa"
-                        value={nome}
-                        onChangeText={setNome}
-                    />
-                </View>
-
-                <View style={styles.inputArea}>
-                    <Icon name="email" size={25} color="#ffc72c" />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="E-mail"
-                        placeholderTextColor="#aaa"
-                        value={email}
-                        onChangeText={setEmail}
-                    />
-                </View>
-
-                <View style={styles.inputArea}>
-                    <Icon name="phone" size={25} color="#ffc72c" />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Telefone"
-                        placeholderTextColor="#aaa"
-                        value={telefone}
-                        onChangeText={setTelefone}
-                    />
-                </View>
-
-                <View style={styles.inputArea}>
-                    <Icon name="lock" size={25} color="#ffc72c" />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Senha"
-                        placeholderTextColor="#aaa"
-                        secureTextEntry
-                        value={senha}
-                        onChangeText={setSenha}
-                    />
-                </View>
-
-                <TouchableOpacity style={styles.button} onPress={handleSalvar}>
-                    <Text style={styles.buttonText}>Salvar Alterações</Text>
-                </TouchableOpacity>
-
+        <TouchableOpacity onPress={handleEscolherFoto} style={styles.fotoContainer}>
+          {foto ? (
+            <>
+              <Image source={{ uri: foto }} style={styles.fotoPerfil} />
+              <Icon name="camera-plus" size={20} color="#000" style={styles.iconeCamera} />
+            </>
+          ) : (
+            <View style={styles.fotoDefault}>
+              <Icon name="camera-plus" size={40} color="#aaa" />
             </View>
+          )}
+        </TouchableOpacity>
+
+
+
+        <Text style={styles.title}>Editar Perfil</Text>
+        <Text style={styles.subtitle}>
+        Mantenha seu perfil sempre completo
+        </Text>
+
+        {/* Os inputs */}
+        <View style={styles.inputArea}>
+          <Icon name="account" size={25} color="#ffc72c" />
+          <TextInput
+            style={styles.input}
+            placeholder="Nome"
+            placeholderTextColor="#aaa"
+            value={nome}
+            onChangeText={setNome}
+          />
         </View>
-    );
+
+        <View style={styles.inputArea}>
+          <Icon name="email" size={25} color="#ffc72c" />
+          <TextInput
+            style={styles.input}
+            placeholder="E-mail"
+            placeholderTextColor="#aaa"
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+
+        <View style={styles.inputArea}>
+          <Icon name="phone" size={25} color="#ffc72c" />
+          <TextInput
+            style={styles.input}
+            placeholder="Telefone"
+            placeholderTextColor="#aaa"
+            value={telefone}
+            onChangeText={setTelefone}
+          />
+        </View>
+
+        <View style={styles.inputArea}>
+          <Icon name="lock" size={25} color="#ffc72c" />
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            placeholderTextColor="#aaa"
+            secureTextEntry
+            value={senha}
+            onChangeText={setSenha}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.button} onPress={handleSalvar}>
+          <Text style={styles.buttonText}>Salvar Alterações</Text>
+        </TouchableOpacity>
+
+      </View>
+    </View>
+  );
 }

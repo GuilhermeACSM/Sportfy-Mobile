@@ -1,0 +1,1 @@
+Falta o Banco de Dados para podermos fazer tudo! Desde salvar foto até fazer o update das informações.

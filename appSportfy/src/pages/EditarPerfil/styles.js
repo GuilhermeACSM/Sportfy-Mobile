@@ -11,6 +11,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  fotoContainer: {
+    position: 'relative',
+  },
   fotoPerfil: {
     width: 120,
     height: 120,
@@ -18,6 +21,14 @@ export default StyleSheet.create({
     marginBottom: 20,
     borderWidth: 2,
     borderColor: '#ffc72c',
+  },
+  iconeCamera: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    backgroundColor: '#ffc72c',
+    padding: 5,
+    borderRadius: 20,
   },
   fotoDefault: {
     width: 120,
@@ -34,7 +45,12 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: 30,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#aaa',
+    textAlign: 'center',
+    marginBottom: 20,
   },
   inputArea: {
     flexDirection: 'row',
